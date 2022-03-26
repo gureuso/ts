@@ -1,0 +1,29 @@
+function toArray<T>(a: T, b: T): T[] {
+  return [a, b];
+}
+
+toArray<string>('a', 'b');
+toArray<number>(1, 2);
+toArray<boolean>(true, false);
+
+interface MyType<T extends string | number | boolean | number[]> {
+  name: string,
+  value: T
+}
+
+const dataA: MyType<string> = {
+  name: 'Data A',
+  value: 'Hello world'
+};
+const dataB: MyType<number> = {
+  name: 'Data B',
+  value: 1234
+};
+const dataC: MyType<boolean> = { // TS2344: Type 'boolean' does not satisfy the constraint 'string | number'.
+  name: 'Data C',
+  value: true
+};
+const dataD: MyType<number[]> = { // TS2344: Type 'number[]' does not satisfy the constraint 'string | number'.
+  name: 'Data D',
+  value: [1, 2, 3, 4]
+};
